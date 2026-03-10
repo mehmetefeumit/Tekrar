@@ -62,3 +62,16 @@ jobs:
           cache: true
       - run: flutter pub get
       - run: flutter build apk --debug
+
+  build-ios:
+    name: Build iOS
+    runs-on: macos-latest
+    needs: [analyze, test, format]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: flutter build ios --debug --no-codesign
